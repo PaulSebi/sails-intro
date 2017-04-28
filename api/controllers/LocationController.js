@@ -14,28 +14,35 @@ module.exports = {
 
       findAllLog : function(req, res){
           User.showUsers(req, function(users){
-              // console.log(users);
-              // console.log(users);
+
               console.log('---Arrays Obtained----');
               var finalvals = [];
               _.each(users, function(user){
                   finalvals.push(user.id);
               });
-              async.map(finalvals, Location.userlocs, function(err, results){
-                  if(err)
-                    return err;
-                  // console.log('------------------');
-                  // console.log(results);
-                  console.log("--------------------");
-                  //convert to array of objects having array of objects
+              var formattedvals = {}, unformattedvals = [];
 
-                  var formattedvals = {};
-                  _.each(results, function(result){
-                       console.log(_.groupBy(result, function(r){return r.username;}));
+              async.series([function(callback){
+                async.map(finalvals, function(user, callback){
+                  Location.userlocs(user, function(err, results){
+                    formattedvals[user] = results;
+                    callback();
                   });
-
-
-                  res.json(formattedvals);
+                }, function(err, results){
+                  if(err)
+                  return err;
+                  console.log(formattedvals);
+                  callback();
+                })
+              },
+              function(callback){
+                unformattedvals = _.toArray(formattedvals);
+                  callback();
+              }],
+              function(err, results){
+                  if(err)
+                    res.json({message:'Error'});
+                  res.json({formatted: formattedvals, unformatted : unformattedvals});
               });
           });
       }

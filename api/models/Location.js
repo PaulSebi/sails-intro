@@ -52,18 +52,13 @@ module.exports = {
           var i;
 
           var formatted = [];
-          console.log(list);
           _.each(list, function(loclog){
               formatted.push({
-              username : loclog.user,
               latitude : loclog.latitude,
               longitude : loclog.longitude,
               timestamp : loclog.createdAt
             });
           });
-
-          if(formatted.length==0)
-            formatted.push({username: userid});
 
           return callback(null, formatted);
       });
