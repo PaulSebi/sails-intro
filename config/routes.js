@@ -21,7 +21,7 @@
  */
 
 module.exports.routes = {
-    '/':'HomepageController.index',
+    // '/home':'HomepageController.index',
     'POST /User/signup': 'UserController.create',
     'GET /User': 'isAuthorized',
     'GET /User/login': 'AuthController.index',
@@ -32,5 +32,6 @@ module.exports.routes = {
     'GET /User/age' : 'UserController.index',
     'POST /User/loclog' : 'LocationController.create',
     'POST /User/findlog' : 'LocationController.findlog',
-    'GET /User/findAllLogs' : 'LocationController.findAllLog'
+    'GET /User/findAllLogs' : 'LocationController.findAllLog',
+    '/home' : '/_public/index.html'
 };

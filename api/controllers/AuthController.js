@@ -9,7 +9,7 @@ module.exports = {
 
 				User.findOne({email:email}, function(er, user){
 					if(!user)
-							return res.json(401, {err: 'No such user'});
+							return res.json(401, {err: 'No such user'}); 	
 
 					User.comparePassword(password, user, function(err, valid){
 							if(err)

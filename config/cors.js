@@ -28,6 +28,21 @@
 
 module.exports.cors = {
 
+  'POST User/findlog' :{
+      target : 'LocationController.findlog',
+      cors :{
+        origin : 'http://localhost',
+        methods : 'POST'
+      }
+  },
+
+  'GET User/login' :{
+      target : 'AuthController.index',
+      cors :{
+        origin : 'http://localhost',
+        methods : 'GET'
+      }
+  },
   /***************************************************************************
   *                                                                          *
   * Allow CORS on all routes by default? If not, you must enable CORS on a   *
@@ -37,7 +52,7 @@ module.exports.cors = {
   *                                                                          *
   ***************************************************************************/
 
-  // allRoutes: false,
+  allRoutes: true,
 
   /***************************************************************************
   *                                                                          *
@@ -47,7 +62,7 @@ module.exports.cors = {
   *                                                                          *
   ***************************************************************************/
 
-  // origin: '*',
+  origin: '*',
 
   /***************************************************************************
   *                                                                          *
@@ -55,7 +70,7 @@ module.exports.cors = {
   *                                                                          *
   ***************************************************************************/
 
-  // credentials: true,
+  credentials: true,
 
   /***************************************************************************
   *                                                                          *
@@ -64,7 +79,7 @@ module.exports.cors = {
   *                                                                          *
   ***************************************************************************/
 
-  // methods: 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
+  methods: 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
 
   /***************************************************************************
   *                                                                          *
@@ -73,6 +88,7 @@ module.exports.cors = {
   *                                                                          *
   ***************************************************************************/
 
+  headers: 'content-type'
   // headers: 'content-type'
 
 };

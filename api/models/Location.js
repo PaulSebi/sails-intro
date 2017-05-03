@@ -23,23 +23,21 @@ module.exports = {
       });
   },
 
-  whereabouts: function(req, res){
+  whereabouts: function(req, callback){
       Location.find({
-          createdAt: { '>' : req.body.fromtime, '<' : req.body.totime},
-          user : req.body.user
+          createdAt: { '>' : req.fromtime, '<' : req.totime},
+          user : req.id
       }).populate('user').exec(function(err, list){
           if(err)
             res.json({message: 'Could Not Find Log'});
           var result = [], i;
           for(i=0; i<list.length; i++)
               result.push({
-                username : list[i].user.firstName,
                 latitude : list[i].latitude,
                 longitude : list[i].longitude,
                 timestamp : list[i].createdAt
               });
-
-          res.json({message: 'Locations Logged At', result});
+          callback(null, result);
         });
       },
 

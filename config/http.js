@@ -59,15 +59,20 @@ module.exports.http = {
     var token, flag;
     var skip = [
       '/User/login',
-      '/User/signup'
+      '/User/signup',
+      '/home',
+      '/static/index.html',
+      '/static/loggedin.html'
     ];
 
     console.log('Requested', req.path, 'SkipLength', skip.length);
+    console.log(req.params);
 
     flag = skip.indexOf(req.path) > -1;
-    console.log("skip", skip)
+    console.log("skip", flag)
     if(!flag) {
         console.log('Still Here :)', flag);
+        console.log(req.method);
         if(req.headers && req.headers.authorization){
             var parts = req.headers.authorization.split(' ');
 
@@ -92,7 +97,7 @@ module.exports.http = {
             req.token = token;
             console.log('Token ----------> ', token.payload.id);
             next();
-            console.log("post next")
+            // console.log("post next")
         });
       } else {
         next(); //!flag

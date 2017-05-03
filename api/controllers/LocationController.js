@@ -7,9 +7,25 @@ module.exports = {
       },
 
       findlog : function(req, res){
-          req.body.user = req.token.payload.id;
-          console.log('Received', req.body);
-          return Location.whereabouts(req, res);
+          console.log("Here");
+          var serve = {};
+          serve.id = req.token.payload.id;
+          serve.fromtime = req.body.fromtime;;
+          serve.totime = req.body.totime;
+          console.log('Received', serve);
+
+          Location.whereabouts(serve, function(err, locations){
+              if(err)
+                  res.json({message : 'Error fetching location data'});
+              console.log({
+                  user : serve.id,
+                  locations : locations
+              });
+              res.view('pages/userlocation.ejs', {
+                  user : serve.id,
+                  locations : locations
+              });
+          });
       },
 
       findAllLog : function(req, res){
