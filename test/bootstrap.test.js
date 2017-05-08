@@ -1,4 +1,6 @@
 var sails = require('sails');
+var chai = require('chai');
+var should = chai.should();
 
 before(function(done){
 	sails.lift({

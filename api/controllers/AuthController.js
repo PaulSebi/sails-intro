@@ -17,7 +17,7 @@ module.exports = {
 
 							if(!valid)
 									return res.json(401, {err: 'Invalid Email/Password'});
-							else 	res.json({user:user, token : jwToken.issue({id:user.id})});
+							else 	res.json({user:user.firstName, token : jwToken.issue({id:user.id})});
 						});
 				});
 		}

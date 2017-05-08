@@ -41,7 +41,7 @@ module.exports = {
     },
 
     beforeCreate : function(values, next){
-      console.log("in before create", values)
+      // console.log("in before create", values)
       bcrypt.genSalt(10, function(err, salt){
           if(err) return next(err);
           bcrypt.hash(values.password, salt, function(err, hash){

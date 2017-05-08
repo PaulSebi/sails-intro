@@ -66,7 +66,8 @@ module.exports.http = {
     ];
 
     console.log('Requested', req.path, 'SkipLength', skip.length);
-    console.log(req.params);
+    console.log('Params',req.params);
+    console.log('Headers', req.headers.authorization);
 
     flag = skip.indexOf(req.path) > -1;
     console.log("skip", flag)
